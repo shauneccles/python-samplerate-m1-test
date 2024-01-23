@@ -30,7 +30,3 @@ dependencies = ["numpy"]
 readme = {file = ["README.rst"]}
 
 [tool.setuptools_scm]
-
-
-[tool.wheel]
-universal = false

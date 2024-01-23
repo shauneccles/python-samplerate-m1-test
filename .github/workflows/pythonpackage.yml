@@ -29,6 +29,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -U setuptools setuptools_scm wheel build twine
         pip install -r requirements.txt
+    - name: Configure non-universal wheel for macOS
+      run: |
+        if [[ "${{ runner.os }}" == "macOS" || "${{ runner.os }}" == "flyci-macos-large-latest-m1" ]]; then
+          echo "[bdist_wheel]" > setup.cfg
+          echo "universal=0" >> setup.cfg
+        fi
     - name: Build package
       run: |
         python -m pip install -e .
