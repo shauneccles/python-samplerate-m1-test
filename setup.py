@@ -104,7 +104,11 @@ class CMakeBuild(build_ext):
                 ]
                 build_args += ["--config", cfg]
 
-        # if sys.platform.startswith("darwin"):
+        if sys.platform.startswith("darwin"):
+            if platform.machine() == "arm64":
+                cmake_args += ["-DCMAKE_OSX_ARCHITECTURES=arm64"]
+            else:
+                cmake_args += ["-DCMAKE_OSX_ARCHITECTURES=x86_64"]
         #     # Cross-compile support for macOS - respect ARCHFLAGS if set
         #     archs = re.findall(r"-arch (\S+)", os.environ.get("ARCHFLAGS", ""))
         #     if archs:
